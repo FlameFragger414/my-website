@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b12">
+  <meta name="description" content="A modern personal website, built for the next idea.">
+  <title>Nice Website — Build what’s next</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; --bg: #090b12; --surface: #121622; --line: rgba(255,255,255,.12); --muted: #9fa9c0; --text: #f4f7ff; --mint: #73f8d1; --violet: #ad9eff; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    body::before { content:""; pointer-events:none; position:fixed; inset:0; z-index:-2; background:radial-gradient(ellipse 36% 33% at 76% 16%,rgba(117,82,243,.22),transparent 85%),radial-gradient(ellipse 37% 38% at 14% 40%,rgba(30,166,163,.12),transparent 85%),#090b12; }
+    .noise { pointer-events:none; position:fixed; inset:0; z-index:10; opacity:.06; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    .wrap { width:min(1100px,calc(100% - 42px)); margin-inline:auto; }
+    .nav { display:flex; justify-content:space-between; align-items:center; padding:25px 0; border-bottom:1px solid rgba(255,255,255,.07); }
+    .logo { color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:21px; letter-spacing:-1px; text-decoration:none; }
+    .logo .dot { color:var(--mint); }
+    .nav-links { display:flex; align-items:center; gap:32px; }
+    .nav-links a { color:#bbc2d3; font-size:14px; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:#fff; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:13px 19px; border-radius:11px; font-weight:700; font-size:14px; text-decoration:none; transition:transform .2s, box-shadow .2s; }
+    .btn:hover { transform:translateY(-3px); }
+    .btn-solid { background:var(--mint); color:#07140e; box-shadow:0 0 45px rgba(115,248,209,.17); }
+    .btn-outline { color:#fff; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.16); }
+    .hero { min-height:590px; padding:120px 0 110px; display:grid; grid-template-columns:1.1fr .9fr; align-items:center; gap:48px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; border:1px solid rgba(115,248,209,.18); color:var(--mint); background:rgba(115,248,209,.06); padding:9px 13px; border-radius:100px; font-size:12px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; }
+    .pulse { height:7px; width:7px; background:var(--mint); border-radius:50%; box-shadow:0 0 0 4px rgba(115,248,209,.1); }
+    h1,h2,h3 { font-family:'Space Grotesk',sans-serif; }
+    h1 { margin:26px 0 20px; font-size:clamp(49px,6vw,78px); line-height:1.04; letter-spacing:-.067em; font-weight:700; }
+    h1 span { background:linear-gradient(100deg,var(--mint),#8dcaff 57%,var(--violet)); background-clip:text; color:transparent; }
+    .lead { max-width:510px; margin:0 0 32px; font-size:17px; line-height:1.75; color:var(--muted); }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; }
+    .preview { position:relative; padding:16px; border:1px solid rgba(255,255,255,.17); border-radius:22px; background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.015)); box-shadow:0 26px 95px rgba(0,0,0,.45),0 0 80px rgba(120,89,250,.13); transform:rotate(2deg); }
+    .preview::after { content:""; position:absolute; inset:-1px; border-radius:22px; background:linear-gradient(130deg,rgba(115,248,209,.36),transparent 43%,rgba(173,158,255,.27)); z-index:-1; filter:blur(15px); opacity:.5; }
+    .window { background:#0d111c; border:1px solid rgba(255,255,255,.1); border-radius:13px; padding:16px; }
+    .bar { display:flex; gap:6px; padding-bottom:18px; border-bottom:1px solid rgba(255,255,255,.06); }
+    .bar i { display:block; height:8px; width:8px; border-radius:50%; background:#f28780; }
+    .bar i:nth-child(2) { background:#e9bd71; } .bar i:nth-child(3) { background:#73d9ae; }
+    .code { margin:22px 0 4px; font:13px/2.2 Consolas,Monaco,monospace; white-space:pre-wrap; color:#b8c5df; }
+    .code .k { color:#bba6ff; } .code .s { color:#83f7d2; } .code .c { color:#78849c; }
+    .status { margin-top:20px; display:flex; justify-content:space-between; gap:8px; font-size:11px; color:#8993aa; border-top:1px solid rgba(255,255,255,.07); padding-top:15px; }
+    .status b { color:var(--mint); }
+    .section-label { color:var(--mint); font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    .section-heading { font-size:clamp(31px,4vw,44px); margin:13px 0 12px; letter-spacing:-.045em; }
+    .section-sub { color:var(--muted); line-height:1.8; max-width:600px; margin:0 0 33px; }
+    .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; }
+    .card { border:1px solid var(--line); border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.018)); padding:27px; transition:transform .25s,border-color .25s,background .25s; }
+    .card:hover { transform:translateY(-6px); border-color:rgba(115,248,209,.5); background:rgba(115,248,209,.035); }
+    .card-icon { width:47px; height:47px; display:grid; place-items:center; border-radius:13px; background:rgba(115,248,209,.09); color:var(--mint); font-size:21px; }
+    .card h3 { font-size:21px; margin:24px 0 10px; letter-spacing:-.035em; }
+    .card p { margin:0; color:var(--muted); font-size:14px; line-height:1.75; }
+    .about { margin:105px 0 85px; border:1px solid var(--line); background:linear-gradient(110deg,rgba(173,158,255,.10),rgba(115,248,209,.045)); padding:43px; border-radius:24px; display:flex; justify-content:space-between; align-items:center; gap:24px; }
+    .about h2 { margin:10px 0; font-size:clamp(28px,3vw,38px); letter-spacing:-.04em; }
+    .about p { color:var(--muted); margin:0; line-height:1.7; max-width:550px; }
+    footer { padding:28px 0 45px; border-top:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:space-between; gap:20px; font-size:13px; color:#8792a7; }
+    footer a { color:var(--mint); text-decoration:none; }
+    @media(max-width:900px) { .hero { grid-template-columns:1fr; padding:85px 0 90px; min-height:auto; } .preview { transform:none; max-width:630px; width:100%; } .cards { grid-template-columns:1fr; } .about { flex-direction:column; align-items:flex-start; } }
+    @media(max-width:600px) { .nav-links a:not(.btn) { display:none; } .nav-links { gap:0; } .nav .btn { padding:10px 14px; } .hero { padding-top:75px; } h1 { font-size:55px; } .preview { padding:10px; } .window { padding:12px; } .code { font-size:11px; } .about { padding:26px; margin-top:75px; } footer { flex-direction:column; align-items:flex-start; } }
+    @media(prefers-reduced-motion:reduce) { html {scroll-behavior:auto;} *,*::before,*::after {transition:none!important;} }
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#home" class="logo">nicewebsite<span class="dot">.</span>tech</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a class="btn btn-outline" href="https://github.com/FlameFragger414/my-website" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
+    </nav>
+    <main>
+      <section id="home" class="hero">
+        <div>
+          <div class="eyebrow"><span class="pulse"></span> Online & building</div>
+          <h1>Ideas into<br><span>reality.</span></h1>
+          <p class="lead">A little corner of the internet for ambitious projects, creative experiments, and whatever comes next.</p>
+          <div class="actions"><a href="#features" class="btn btn-solid">Explore the site <span aria-hidden="true">↗</span></a><a href="#about" class="btn btn-outline">Learn more →</a></div>
+        </div>
+        <div class="preview" aria-label="Stylised code editor graphic">
+          <div class="window"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="code"><span class="c">// The next big thing starts here</span><br><span class="k">const</span> next = {<br>  idea: <span class="s">"something amazing"</span>,<br>  mindset: <span class="s">"keep building"</span>,<br>  limits: <span class="s">"none"</span>,<br>};<br><br><span class="k">function</span> launch() {<br>  <span class="k">return</span> <span class="s">"let's go 🚀"</span>;<br>}</div>
+            <div class="status"><span>● index.html</span><span><b>●</b> READY TO DEPLOY</span></div>
+          </div>
+        </div>
+      </section>
+      <section id="features" aria-labelledby="features-title">
+        <div class="section-label">Designed for what's next</div>
+        <h2 id="features-title" class="section-heading">A better place to build.</h2>
+        <p class="section-sub">Clean design, small details, and zero unnecessary complexity. Made to be fast, flexible, and easy to make your own.</p>
+        <div class="cards">
+          <article class="card"><div class="card-icon" aria-hidden="true">⌘</div><h3>Built for creators</h3><p>A digital home for projects, ideas, coding experiments, and anything worth showing off.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">✧</div><h3>Designed to stand out</h3><p>Smooth hover interactions, subtle gradients, crisp typography, and a responsive layout.</p></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">⚡</div><h3>Fast by default</h3><p>No bulky frameworks required. Just straightforward HTML and CSS, ready for Cloudflare.</p></article>
+        </div>
+      </section>
+      <section id="about" class="about" aria-labelledby="about-title">
+        <div><div class="section-label">Your next move</div><h2 id="about-title">Make it yours.</h2><p>This is a starter design. Edit the text, add your real projects, and keep improving it as you go.</p></div>
+        <a class="btn btn-solid" href="https://github.com/FlameFragger414/my-website" target="_blank" rel="noopener noreferrer">View source ↗</a>
+      </section>
+    </main>
+    <footer><span>© <span id="year">2026</span> nicewebsite.tech — Built to create.</span><span>Hosted with <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer">Cloudflare</a></span></footer>
+  </div>
+  <script>document.getElementById('year').textContent = String(new Date().getFullYear());</script>
+</body>
+</html>
